@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
+
 import './App.css'
 
 export default function App() {
@@ -8,11 +9,45 @@ export default function App() {
   return (
     <div className="App">
       <MovieList />
+      {/* <AddColor /> */}
     </div>
   )
 }
+
+function AddColor() {
+  const [color, setColor] = useState("pink")
+  const styles = {
+    backgroundColor: color
+  }
+  const [colorList, setColorList] = useState(["crimson", "blue"])
+
+  return (
+    <div>
+      <input style={styles} type="text"
+        onChange={(event) => setColor(event.target.value)}
+        value={color}
+      />
+      <button onClick={() => setColorList([...colorList, color])}>Add color</button>
+      {colorList.map((clr) => <ColorBox color={clr} />)}
+    </div >
+
+
+  )
+}
+
+function ColorBox({ color }) {
+  const styles = {
+    width: "250px",
+    height: "25px",
+    margin: " 5px 0px",
+    background: color
+  }
+  return (
+    <div style={styles}></div>
+  )
+}
 function MovieList() {
-  const movies = [
+  const [movieList, setMovieList] = useState([
     {
       "name": "Vikram",
       "poster": "https://m.media-amazon.com/images/M/MV5BMmJhYTYxMGEtNjQ5NS00MWZiLWEwN2ItYjJmMWE2YTU1YWYxXkEyXkFqcGdeQXVyMTEzNzg0Mjkx._V1_.jpg",
@@ -79,24 +114,47 @@ function MovieList() {
       "summary": "When Earth becomes uninhabitable in the future, a farmer and ex-NASA\\n pilot, Joseph Cooper, is tasked to pilot a spacecraft, along with a team\\n of researchers, to find a new planet for humans.",
       "rating": 8.8
     }
-  ]
+  ])
+  const [name, setName] = useState("")
+  const [poster, setPoster] = useState("")
+  const [rating, setRating] = useState("")
+  const [summary, setSummary] = useState("")
   return (
-    < div className="movie-list" >
-      {movies.map((mv) => <Movie movie={mv} />)}
-    </div >
+    <div>
+      <div className="add-movie">
+        <input onChange={(event) => setPoster(event.target.value)} type="text" placeholder="Movie Poster" />
+        <input onChange={(event) => setName(event.target.value)} type="text" placeholder="Movie Name" />
+        <input onChange={(event) => setRating(event.target.value)} type="text" placeholder="Movie Rating" />
+        <input onChange={(event) => setSummary(event.target.value)} type="text" placeholder="Movie Summary" />
+        <button onClick={() => {
+          const newMovie = {
+            poster: poster,
+            name: name,
+            rating: rating,
+            summary: summary
+          }
+          setMovieList([...movieList, newMovie])
+        }}>Add Movie</button>
+      </div>
+      < div className="movie-list" >
+        {movieList.map((mv) => <Movie movie={mv} />)}
+      </div >
+    </div>
+
   )
 
 }
 
 function Movie({ movie }) {
+  // conditional styling
   const style = {
     color: movie.rating > 8.5 ? "green" : "crimson"
   }
   const [show, setShow] = useState(true)
 
-  const summaryStyle = {
-    display: show ? "block" : "none"
-  }
+  // const summaryStyle = {
+  //   display: show ? "block" : "none"
+  // }
   return (
     <div className="movie-container">
       <img className="movie-poster" src={movie.poster} alt={movie.name} />
@@ -105,7 +163,11 @@ function Movie({ movie }) {
         <p style={style} className="movie-rating">⭐{movie.rating}</p>
       </div>
       <button onClick={() => setShow(!show)}>Toggle</button>
-      <p style={summaryStyle} className="movie-summary"><b>Summary :</b> {movie.summary}</p>
+      {/* conditional styling */}
+      {/* <p style={summaryStyle} className="movie-summary"><b>Summary :</b> {movie.summary}</p> */}
+
+      {/* conditional rendering */}
+      {show ? <p className="movie-summary"><b>Summary :</b> {movie.summary}</p> : null}
       <Button />
     </div >
   )
