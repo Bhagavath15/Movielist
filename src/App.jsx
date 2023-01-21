@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
-
+import Button from '@mui/material/Button';
 import './App.css'
 
 export default function App() {
@@ -8,6 +8,7 @@ export default function App() {
 
   return (
     <div className="App">
+
       <MovieList />
       {/* <AddColor /> */}
     </div>
@@ -126,7 +127,7 @@ function MovieList() {
         <input onChange={(event) => setName(event.target.value)} type="text" placeholder="Movie Name" />
         <input onChange={(event) => setRating(event.target.value)} type="text" placeholder="Movie Rating" />
         <input onChange={(event) => setSummary(event.target.value)} type="text" placeholder="Movie Summary" />
-        <button onClick={() => {
+        <Button variant="contained" onClick={() => {
           const newMovie = {
             poster: poster,
             name: name,
@@ -134,7 +135,8 @@ function MovieList() {
             summary: summary
           }
           setMovieList([...movieList, newMovie])
-        }}>Add Movie</button>
+        }}>Add Movie</Button>
+
       </div>
       < div className="movie-list" >
         {movieList.map((mv) => <Movie movie={mv} />)}
@@ -162,24 +164,24 @@ function Movie({ movie }) {
         <p className="movie-name"><h2>{movie.name}</h2></p>
         <p style={style} className="movie-rating">⭐{movie.rating}</p>
       </div>
-      <button onClick={() => setShow(!show)}>Toggle</button>
+      <Button variant="contained" onClick={() => setShow(!show)}>Toggle</Button>
       {/* conditional styling */}
       {/* <p style={summaryStyle} className="movie-summary"><b>Summary :</b> {movie.summary}</p> */}
 
       {/* conditional rendering */}
       {show ? <p className="movie-summary"><b>Summary :</b> {movie.summary}</p> : null}
-      <Button />
+      <Btn />
     </div >
   )
 }
 
-function Button() {
+function Btn() {
   const [like, setLike] = useState(0)
   const [disLike, setDisLike] = useState(0)
   return (
     <div>
-      <button onClick={() => setLike(like + 1)}>👍{like}</button>
-      <button onClick={() => setDisLike(disLike + 1)}>👎{disLike}</button>
+      <Button variant="outlined" onClick={() => setLike(like + 1)}>👍{like}</Button>
+      <Button variant="outlined" onClick={() => setDisLike(disLike + 1)}>👎{disLike}</Button>
     </div>
   )
 }
