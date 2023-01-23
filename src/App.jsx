@@ -1,7 +1,13 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import IconButton from '@mui/material/IconButton';
+import Stack from '@mui/material/Stack';
+import DeleteIcon from '@mui/icons-material/Delete';
 import './App.css'
+import Badge from '@mui/material/Badge';
+import MailIcon from '@mui/icons-material/Mail';
 
 export default function App() {
 
@@ -123,10 +129,10 @@ function MovieList() {
   return (
     <div>
       <div className="add-movie">
-        <input onChange={(event) => setPoster(event.target.value)} type="text" placeholder="Movie Poster" />
-        <input onChange={(event) => setName(event.target.value)} type="text" placeholder="Movie Name" />
-        <input onChange={(event) => setRating(event.target.value)} type="text" placeholder="Movie Rating" />
-        <input onChange={(event) => setSummary(event.target.value)} type="text" placeholder="Movie Summary" />
+        <TextField onChange={(event) => setPoster(event.target.value)} variant="outlined" label="Movie Poster" />
+        <TextField onChange={(event) => setName(event.target.value)} variant="outlined" label="Movie Name" />
+        <TextField onChange={(event) => setRating(event.target.value)} variant="outlined" label="Movie Rating" />
+        <TextField onChange={(event) => setSummary(event.target.value)} variant="outlined" label="Movie Summary" />
         <Button variant="contained" onClick={() => {
           const newMovie = {
             poster: poster,
@@ -180,8 +186,17 @@ function Btn() {
   const [disLike, setDisLike] = useState(0)
   return (
     <div>
-      <Button variant="outlined" onClick={() => setLike(like + 1)}>👍{like}</Button>
-      <Button variant="outlined" onClick={() => setDisLike(disLike + 1)}>👎{disLike}</Button>
+      <IconButton onClick={() => setLike(like + 1)} color="primary" aria-label="add to shopping cart">
+        <Badge badgeContent={like} color="primary">👍
+        </Badge>
+      </IconButton>
+      <IconButton onClick={() => setDisLike(disLike + 1)} color="primary" aria-label="add to shopping cart">
+
+        <Badge badgeContent={disLike} color="error">👎
+        </Badge>
+      </IconButton>
+
+
     </div>
   )
 }
