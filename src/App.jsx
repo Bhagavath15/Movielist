@@ -8,14 +8,17 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import './App.css'
 import Badge from '@mui/material/Badge';
 import MailIcon from '@mui/icons-material/Mail';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import { TicTacTo } from './TicTacTo';
 
 export default function App() {
 
 
   return (
     <div className="App">
-
-      <MovieList />
+      <TicTacTo />
+      {/* <MovieList /> */}
       {/* <AddColor /> */}
     </div>
   )
@@ -170,7 +173,13 @@ function Movie({ movie }) {
         <p className="movie-name"><h2>{movie.name}</h2></p>
         <p style={style} className="movie-rating">⭐{movie.rating}</p>
       </div>
-      <Button variant="contained" onClick={() => setShow(!show)}>Toggle</Button>
+      {/* <IconButton
+        color="primary"
+        onClick={() => setShow(!show)}
+        arial-label="Toggle-summary">
+        {show ? <ExpandLessIcon /> : <ExpandMoreIcon>}
+        </IconButton> */}
+
       {/* conditional styling */}
       {/* <p style={summaryStyle} className="movie-summary"><b>Summary :</b> {movie.summary}</p> */}
 
